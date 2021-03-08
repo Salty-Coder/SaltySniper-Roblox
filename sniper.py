@@ -1,4 +1,7 @@
-#https://www.roblox.com/catalog/136758649/Steampunk-Robin-Hood
+"""
+Program made by Salty-Coder.
+Protected by GNU General Public License v3.0
+"""
 
 from selenium import webdriver
 from random import randint
