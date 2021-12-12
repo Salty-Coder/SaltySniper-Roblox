@@ -1,0 +1,17 @@
+selenium
+random
+random
+time
+winsound
+ctypes
+pygetwindow as gw
+os
+sys
+colorama
+webbrowser
+win10toast_click
+selenium.webdriver.common.by
+selenium.common.exceptions
+selenium.webdriver.support.ui
+selenium.webdriver.support
+webdriver_manager.chrome
