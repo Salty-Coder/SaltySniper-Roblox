@@ -1,6 +1,5 @@
 selenium
 random
-random
 time
 winsound
 ctypes
