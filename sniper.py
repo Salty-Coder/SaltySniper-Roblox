@@ -40,7 +40,7 @@ debug(consoletitle)
 console = gw.getWindowsWithTitle(consoletitle)[0]
 
 
-typer = print(Fore.RED+"""
+print(Fore.RED+"""
  ________  ________  ___   _________    ___    ___      ________  ________   ___  ________  _______   ________     
 |\   ____\|\   __  \|\  \ |\___   ___\ |\  \  /  /|    |\   ____\|\   ___  \|\  \|\   __  \|\  ___ \ |\   __  \    
 \ \  \___|\ \  \|\  \ \  \\|___ \  \_| \ \  \/  / /    \ \  \___|\ \  \\ \  \ \  \ \  \|\  \ \   __/|\ \  \|\  \   
@@ -51,8 +51,6 @@ typer = print(Fore.RED+"""
    \|_________|                       \|___|/             \|_________|                                             
                                                                                                                    
                                                                                                                    """+Fore.RESET)
-
-typer()
 
 link = str(input("Link to limited: "))
 
