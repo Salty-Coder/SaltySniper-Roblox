@@ -13,6 +13,5 @@ This program uses chromedriver and does NOT need access to your account.
 	3. Go to https://chromedriver.chromium.org/downloads and download the zip for your Chrome version.
 	4. Unzip the file.
 	5. Place the .exe file in the "chromedriver" folder.
-	
 	6. Go to cmd and type "pip install -r requirements.txt".
 	7. "py sniper.py"
