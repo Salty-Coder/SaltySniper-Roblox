@@ -24,7 +24,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def debug(msg):
     if len(sys.argv) > 1:
         if sys.argv[1] == '--debug':
-            print(str(msg))
+            print(msg)
             return
 
 clear=lambda: os.system('cls')
@@ -55,7 +55,7 @@ print(Fore.RED+"""
 link = str(input("Link to limited: "))
 
 ddelay = 5
-delay = input("Scan delay (default is " + str(ddelay) + "): ")
+delay = input(f"Scan delay (default is {ddelay}): ")
 
 if delay.isnumeric and len(delay) > 0:
     debug("func")
@@ -63,13 +63,13 @@ if delay.isnumeric and len(delay) > 0:
 debug(delay)
 bs = int(input("Are you looking to, 1 - Buy, 2 - Sell?: "))
 
-if bs != 1 and bs != 2:
+if bs not in [1, 2]:
     print("You must buy or sell!")
     quit()
 
 if bs == 1:
     price = int(input("What is your maximum price to buy at?: "))
-if bs == 2:
+elif bs == 2:
     price = int(input("What is your minimum price to sell at?: "))
 
 if link:
@@ -79,7 +79,7 @@ if link:
     browser.get(link)
 
     console.minimize()
-    
+
 
     limited = browser.find_element(By.CSS_SELECTOR, '#item-container > div.remove-panel.section-content.top-section > div.border-bottom.item-name-container > h2').text
 
@@ -88,7 +88,7 @@ if link:
 
     while True:
         element = False
-        while element == False:
+        while not element:
             debug("none")
             element = WebDriverWait(browser, 10).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, '#item-details > div.clearfix.price-container > div.price-container-text > div.price-info > div > span.text-robux-lg.wait-for-i18n-format-render'))
@@ -103,26 +103,50 @@ if link:
             if int(currentprice) <= price: #currentprice <= desired price
                 if int(currentprice) < lowestprice:
                     lowestprice = int(currentprice)
-                    toaster.show_toast("Salty Sniper","The price on " + limited + " reached an all-time low at " + str(currentprice) + "!\nGO GRAB IT!", icon_path=None, duration=7, threaded=True)
+                    toaster.show_toast(
+                        "Salty Sniper",
+                        f"The price on {limited} reached an all-time low at {str(currentprice)}"
+                        + "!\nGO GRAB IT!",
+                        icon_path=None,
+                        duration=7,
+                        threaded=True,
+                    )
                     winsound.Beep(540, 2000)
                 else:
-                    toaster.show_toast("Salty Sniper","The price on " + limited + " has reached your desired buy price at " + str(currentprice) + "!", icon_path=None, duration=5, threaded=True)
+                    toaster.show_toast(
+                        "Salty Sniper",
+                        f"The price on {limited} has reached your desired buy price at {str(currentprice)}!",
+                        icon_path=None,
+                        duration=5,
+                        threaded=True,
+                    )
                     winsound.Beep(500, 1000)
-        #----------------------------------
-        #----------------------------------
-        if bs == 2:
+        elif bs == 2:
             if int(currentprice) >= price: #currentprice >= desired price
                 if int(currentprice) > highestprice:
                     highestprice = int(currentprice)
-                    toaster.show_toast("Salty Sniper","The price on " + limited + " reached an all-time high at " + str(currentprice) + "!\nGO SELL IT!", icon_path=None, duration=7, threaded=True)
+                    toaster.show_toast(
+                        "Salty Sniper",
+                        f"The price on {limited} reached an all-time high at {str(currentprice)}"
+                        + "!\nGO SELL IT!",
+                        icon_path=None,
+                        duration=7,
+                        threaded=True,
+                    )
                     winsound.Beep(540, 2000)
                 else:
-                    toaster.show_toast("Salty Sniper","The price on " + limited + " has reached your desired sell price at " + str(currentprice) + "!", icon_path=None, duration=5, threaded=True)
+                    toaster.show_toast(
+                        "Salty Sniper",
+                        f"The price on {limited} has reached your desired sell price at {str(currentprice)}!",
+                        icon_path=None,
+                        duration=5,
+                        threaded=True,
+                    )
                     winsound.Beep(500, 1000)
         #----------------------------------
 
 
 
-        
+
         time.sleep(delay or ddelay)
         browser.get(link)
